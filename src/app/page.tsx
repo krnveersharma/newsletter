@@ -4,6 +4,7 @@ import Branding from '@/modules/home/features/branding'
 import FeatureHighlight from '@/modules/home/features/featurehighlight'
 import Pricing from '@/modules/home/features/pricing'
 import Home from '@/modules/home/home'
+import Footer from '@/shared/widgets/footer/footer'
 import Header from '@/shared/widgets/header/header'
 import Logo from '@/shared/widgets/header/logo'
 import React from 'react'
@@ -17,6 +18,7 @@ const Page = () => {
       <Benefits/>
       <FeatureHighlight/>
       <Pricing/>
+      <Footer/>
     </div>
   )
 }
