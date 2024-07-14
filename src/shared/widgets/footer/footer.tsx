@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import FooterLogo from "./footer.logo";
+import FooterLogo from "../../../modules/home/elements/footer.logo";
 
 const Footer = () => {
   return (
