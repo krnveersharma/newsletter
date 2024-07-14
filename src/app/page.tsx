@@ -2,6 +2,7 @@ import Banner from '@/modules/home/features/banner'
 import Benefits from '@/modules/home/features/benifits'
 import Branding from '@/modules/home/features/branding'
 import FeatureHighlight from '@/modules/home/features/featurehighlight'
+import Pricing from '@/modules/home/features/pricing'
 import Home from '@/modules/home/home'
 import Header from '@/shared/widgets/header/header'
 import Logo from '@/shared/widgets/header/logo'
@@ -15,6 +16,7 @@ const Page = () => {
       <Branding/>
       <Benefits/>
       <FeatureHighlight/>
+      <Pricing/>
     </div>
   )
 }
