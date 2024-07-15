@@ -28,11 +28,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
-          
-          {children}
-        </body>
-      </html>
+      <body className={`${clashDisplay.variable}`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
     </ClerkProvider>
   );
 }
