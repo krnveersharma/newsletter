@@ -5,24 +5,23 @@ import { DefaultJsonData } from "@/assets/mails/default";
 import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
+import { saveEmail } from "@/actions/save.email";
 import toast from "react-hot-toast";
+import { GetEmailDetails } from "@/actions/get.email-details";
 
 const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any | null>(DefaultJsonData);
   const { user } = useClerk();
   const emailEditorRef = useRef<EditorRef>(null);
   const history = useRouter();
 
-  const exportHtml = () => {
-    const unlayer = emailEditorRef.current?.editor;
+  
 
-    unlayer?.exportHtml(async (data) => {
-      const { design, html } = data;
-      setJsonData(design);
-    });
-  };
-
+  useEffect(() => {
+    getEmailDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
@@ -34,9 +33,28 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
 
     unlayer?.exportHtml(async (data) => {
       const { design } = data;
+      await saveEmail({
+        title: subjectTitle,
+        content: JSON.stringify(design),
+        newsLetterOwnerId: user?.id!,
+      }).then((res: any) => {
+        toast.success(res.message);
+        history.push("/dashboard/write");
+      });
     });
   };
 
+  const getEmailDetails = async () => {
+    await GetEmailDetails({
+      title: subjectTitle,
+      newsLetterOwnerId: user?.id!,
+    }).then((res: any) => {
+      if (res) {
+        setJsonData(JSON.parse(res?.content));
+      }
+      setLoading(false);
+    });
+  };
 
   return (
     <>
@@ -56,7 +74,7 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
             </Button>
             <Button
               className="bg-[#000] text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg"
-              onClick={exportHtml}
+              
             >
               <span>Send</span>
             </Button>
