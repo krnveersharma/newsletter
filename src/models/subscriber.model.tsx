@@ -6,6 +6,14 @@ const subscriberSchema=new Schema({
     },
     newsLetterOwnerId:{
         type:String,
+    },
+    source:{
+        type:String,
+        default:"Informed Box",
+    },
+    status:{
+        type:String,
+        default:"Subscribed"
     }
 },{timestamps:true});
 
