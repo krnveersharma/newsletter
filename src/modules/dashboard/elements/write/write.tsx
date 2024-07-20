@@ -32,7 +32,7 @@ const Write = () => {
 
   const FindEmails = async () => {
     const res=await getEmails({ newsLetterOwnerId: user?.id! })
-    const data=JSON.parse(res);
+    const data=await JSON.parse(res?res:"");
         setEmails(data);
   
      
