@@ -23,7 +23,8 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
             newsLetterOwnerId:newsLetterOwner?.id,
         });
         if (isSubscriberExist){
-            return {message:"Email already exists"};
+            console.log("here")
+            return {error:"Subscriber already exists"};
         }
         else{
             const subscriber=await Subscriber.create({
@@ -36,6 +37,6 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
 
 
     } catch (error) {
-        return {message:"Error occured while subscribing"};
+        return {error:"Error occured while subscribing"};
     }
 }
