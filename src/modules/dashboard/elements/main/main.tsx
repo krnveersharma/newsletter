@@ -68,6 +68,7 @@ const Main = () => {
                       copied ? "bg-blue-200" : "bg-transparent"
                     }`}
                   >
+                    
                     {process.env.NEXT_PUBLIC_WEBSITE_URL}/subscribe?username=
                     {user?.username}
                   </small>

@@ -23,7 +23,6 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
             newsLetterOwnerId:newsLetterOwner?.id,
         });
         if (isSubscriberExist){
-            console.log("here")
             return {error:"Subscriber already exists"};
         }
         else{
