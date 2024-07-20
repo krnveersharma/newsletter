@@ -12,7 +12,7 @@ export const getSubscribers=async({
         const subscribers=await Subscriber.find({
             newsLetterOwnerId,
         });
-        return subscribers;
+        return JSON.stringify(subscribers);
     } catch (error) {
         console.log(error);
     }
