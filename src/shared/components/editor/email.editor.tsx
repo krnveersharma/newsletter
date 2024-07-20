@@ -16,7 +16,15 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   const emailEditorRef = useRef<EditorRef>(null);
   const history = useRouter();
 
-  
+  const exportHtml = () => {
+    const unlayer = emailEditorRef.current?.editor;
+
+    unlayer?.exportHtml(async (data) => {
+      const { design, html } = data;
+      setJsonData(design);
+   
+    });
+  };
 
   useEffect(() => {
     getEmailDetails();
@@ -33,27 +41,28 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
 
     unlayer?.exportHtml(async (data) => {
       const { design } = data;
-      await saveEmail({
+      const res=await saveEmail({
         title: subjectTitle,
         content: JSON.stringify(design),
         newsLetterOwnerId: user?.id!,
-      }).then((res: any) => {
+      });
+      if(res){
         toast.success(res.message);
         history.push("/dashboard/write");
-      });
+      }
     });
   };
 
   const getEmailDetails = async () => {
-    await GetEmailDetails({
+    const res=await GetEmailDetails({
       title: subjectTitle,
       newsLetterOwnerId: user?.id!,
-    }).then((res: any) => {
+    })
       if (res) {
-        setJsonData(JSON.parse(res?.content));
+        const data=await JSON.parse(res);
+        setJsonData(JSON.parse(data?.content));
       }
       setLoading(false);
-    });
   };
 
   return (
@@ -74,7 +83,7 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
             </Button>
             <Button
               className="bg-[#000] text-white cursor-pointer flex items-center gap-1 border text-lg rounded-lg"
-              
+              onClick={exportHtml}
             >
               <span>Send</span>
             </Button>

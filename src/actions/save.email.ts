@@ -1,7 +1,7 @@
 'use server'
 
 import Email from "@/models/emai.model"
-import { connectDB } from "@/shared/libs/db"
+import { connectDb } from "@/shared/libs/db";
 
 export const saveEmail=async({
     title,
@@ -13,7 +13,7 @@ export const saveEmail=async({
     newsLetterOwnerId:string;
 })=>{
     try{
-        await connectDB();
+        await connectDb();
         const email=await Email.findOne({
             title,
             newsLetterOwnerId,

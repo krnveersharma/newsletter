@@ -27,17 +27,15 @@ const Write = () => {
 
   useEffect(() => {
     FindEmails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, [user]);
 
   const FindEmails = async () => {
-    await getEmails({ newsLetterOwnerId: user?.id! })
-      .then((res) => {
-        setEmails(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const res=await getEmails({ newsLetterOwnerId: user?.id! })
+    const data=JSON.parse(res);
+        setEmails(data);
+  
+     
   };
 
   
