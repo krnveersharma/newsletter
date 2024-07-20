@@ -28,7 +28,9 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
         else{
             const subscriber=await Subscriber.create({
                 email,
-                newsLetterOwnerId:newsLetterOwner?.id
+                newsLetterOwnerId:newsLetterOwner?.id,
+                source:"InformedBox",
+                status:"Subscribed"
             })
             console.log(subscriber)
             return {message:subscriber}

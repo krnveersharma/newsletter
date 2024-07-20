@@ -43,6 +43,7 @@ const SubscribersData = () => {
       <Box
         m="40px 0 0 0"
         height="80vh"
+        maxWidth={'1200px'}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
