@@ -1,14 +1,16 @@
 "use client";
 
+import { AddSubscriber } from "@/actions/add.subscriber";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const Page = () => {
   const [value, setValue] = useState("");
   const searchParams = useSearchParams();
-  const username: string | null = searchParams.get("username");
+  const username: string = searchParams.get("username")!;
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await AddSubscriber({email:value,username});
   };
   return (
     <div className="w-full flex flex-col items-center justify-center h-screen">
