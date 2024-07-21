@@ -21,7 +21,7 @@ interface subscribersAnalyticsData {
 const SubscribersChart = () => {
   const data:subscribersAnalyticsData[]=[];
   const {subscribersData,loading}=UseSubscribersAnalytics();
-
+  
   return (
     <div className="my-5 p-5 border rounded bg-white w-full md:h-[55vh] xl:h-[60vh]">
       <div className="w-full flex">
