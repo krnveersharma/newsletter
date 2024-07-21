@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import { subscribersAnalytics } from "@/actions/subscribers.analytics";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -9,6 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import AnimatedLoading from "../loading/loading";
 
 interface subscribersAnalyticsData {
   month: string;
@@ -16,66 +18,18 @@ interface subscribersAnalyticsData {
 }
 
 const SubscribersChart = () => {
-  const [subscribersData, setSubscribersData] = useState<any>([
-    {
-      month: "Jan 2024",
-      count: 2400,
-    },
-    {
-      month: "Feb 2024",
-      count: 1398,
-    },
-    {
-      month: "March 2024",
-      count: 9800,
-    },
-    {
-      month: "April 2024",
-      count: 3908,
-    },
-    {
-      month: "May 2024",
-      count: 4800,
-    },
-    {
-      month: "Jun 2024",
-      count: 3800,
-    },
-    {
-      month: "July 2024",
-      count: 4300,
-    },
-  ]);
-  const data=[
-    {
-      month: "Jan 2024",
-      count: 2400,
-    },
-    {
-      month: "Feb 2024",
-      count: 1398,
-    },
-    {
-      month: "March 2024",
-      count: 9800,
-    },
-    {
-      month: "April 2024",
-      count: 3908,
-    },
-    {
-      month: "May 2024",
-      count: 4800,
-    },
-    {
-      month: "Jun 2024",
-      count: 3800,
-    },
-    {
-      month: "July 2024",
-      count: 4300,
-    },
-  ];
+  const [subscribersData, setSubscribersData] = useState<any>([]);
+  const [loading, setLoading] = useState(true)
+  useEffect(()=>{
+    SubscribersAnalytics();
+  },[])
+  const SubscribersAnalytics=async()=>{
+    const res=await subscribersAnalytics();
+    const data=await JSON.parse(res||"");
+    setSubscribersData(data.last7Months);
+    setLoading(false);
+  }  
+
   return (
     <div className="my-5 p-5 border rounded bg-white w-full md:h-[55vh] xl:h-[60vh]">
       <div className="w-full flex">
@@ -88,12 +42,13 @@ const SubscribersChart = () => {
           <span className="pl-2 text-sm opacity-[.7]">Subscribers</span>
         </div>
       </div>
-      
-        <ResponsiveContainer width="100%" height={"85%"} className={"mt-5"}>
+      {loading?(<>
+      <div className="w-full h-full flex items-center justify-center"><AnimatedLoading  size={10} /></div>
+      </>): <ResponsiveContainer width="100%" height={"85%"} className={"mt-5"}>
           <LineChart
             width={500}
             height={200}
-            data={data}
+            data={subscribersData}
             syncId="anyId"
             margin={{
               top: 10,
@@ -113,7 +68,7 @@ const SubscribersChart = () => {
               fill="#EB4898"
             />
           </LineChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer>}
     </div>
   );
 };
