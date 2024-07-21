@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AnimatedLoading from "../loading/loading";
+import UseSubscribersAnalytics from "@/shared/hooks/useSubscribersAnalytics";
 
 interface subscribersAnalyticsData {
   month: string;
@@ -18,17 +19,8 @@ interface subscribersAnalyticsData {
 }
 
 const SubscribersChart = () => {
-  const [subscribersData, setSubscribersData] = useState<any>([]);
-  const [loading, setLoading] = useState(true)
-  useEffect(()=>{
-    SubscribersAnalytics();
-  },[])
-  const SubscribersAnalytics=async()=>{
-    const res=await subscribersAnalytics();
-    const data=await JSON.parse(res||"");
-    setSubscribersData(data.last7Months);
-    setLoading(false);
-  }  
+  const data:subscribersAnalyticsData[]=[];
+  const {subscribersData,loading}=UseSubscribersAnalytics();
 
   return (
     <div className="my-5 p-5 border rounded bg-white w-full md:h-[55vh] xl:h-[60vh]">
