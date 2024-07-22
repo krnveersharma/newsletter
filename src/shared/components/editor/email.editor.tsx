@@ -8,6 +8,7 @@ import { Button } from "@nextui-org/react";
 import { saveEmail } from "@/actions/save.email";
 import toast from "react-hot-toast";
 import { GetEmailDetails } from "@/actions/get.email-details";
+import { sendEmail } from "@/shared/utils/email.sender";
 
 const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,14 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
       setJsonData(design);
-   
+      await sendEmail({
+        userEmail:["karanveer1029y@gmail.com","2021kucp1082@iiitkota.ac.in"],
+        subject:"",
+        content:html
+      }).then((res)=>{
+        toast.success("Email sent successfully!");
+        history.push('/dashboard/write');
+      })
     });
   };
 
@@ -41,12 +49,12 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
 
     unlayer?.exportHtml(async (data) => {
       const { design } = data;
-      const res=await saveEmail({
+      const res = await saveEmail({
         title: subjectTitle,
         content: JSON.stringify(design),
         newsLetterOwnerId: user?.id!,
       });
-      if(res){
+      if (res) {
         toast.success(res.message);
         history.push("/dashboard/write");
       }
@@ -54,15 +62,15 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   };
 
   const getEmailDetails = async () => {
-    const res=await GetEmailDetails({
+    const res = await GetEmailDetails({
       title: subjectTitle,
       newsLetterOwnerId: user?.id!,
-    })
-      if (res) {
-        const data=await JSON.parse(res);
-        setJsonData(JSON.parse(data?.content));
-      }
-      setLoading(false);
+    });
+    if (res) {
+      const data = await JSON.parse(res);
+      setJsonData(JSON.parse(data?.content));
+    }
+    setLoading(false);
   };
 
   return (
