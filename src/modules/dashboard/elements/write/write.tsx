@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteEmail } from "@/actions/delete.email";
 import { getEmails } from "@/actions/get.emails";
 import { ICONS } from "@/shared/utils/icons";
 import { useClerk } from "@clerk/nextjs";
@@ -63,7 +64,12 @@ const Write = () => {
             >
               <span
                 className="absolute block z-20 right-2 top-2 text-2xl cursor-pointer"
-               
+               onClick={async(e)=>{
+                e.preventDefault();
+                await deleteEmail({emailId:i?._id}).then((res)=>{
+                  FindEmails();
+                })
+               }}
               >
                 {ICONS.delete}
               </span>

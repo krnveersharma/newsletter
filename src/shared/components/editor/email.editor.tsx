@@ -24,7 +24,7 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
       const { design, html } = data;
       setJsonData(design);
       await sendEmail({
-        userEmail:["karanveer1029y@gmail.com","2021kucp1082@iiitkota.ac.in"],
+        userEmail:["karanveer1029y@gmail.com","2021kucp1082@iiitkota.ac.in","2021kuec2056@iiitkota.ac.in"],
         subject:"",
         content:html
       }).then((res)=>{
@@ -68,7 +68,9 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
     });
     if (res) {
       const data = await JSON.parse(res);
+      if(data){
       setJsonData(JSON.parse(data?.content));
+      }
     }
     setLoading(false);
   };

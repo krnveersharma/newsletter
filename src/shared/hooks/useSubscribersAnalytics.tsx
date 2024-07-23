@@ -10,7 +10,8 @@ const UseSubscribersAnalytics = () => {
   }, []);
   const SubscribersAnalytics = async () => {
     const res = await subscribersAnalytics();
-    const data = await JSON.parse(res || "");
+    const data = await JSON.parse(res || "{'last7Months':[{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0},{month: '6 Feb 2024', count: 0}]}");
+    console.log("data: ",data)
     setSubscribersData(data.last7Months);
     setLoading(false);
   };
