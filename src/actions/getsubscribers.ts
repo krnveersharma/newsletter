@@ -9,9 +9,12 @@ export const getSubscribers=async({
 }:{newsLetterOwnerId:string})=>{
     try {
         await connectDb();
+        console.log("id: ",newsLetterOwnerId)
         const subscribers=await Subscriber.find({
-            newsLetterOwnerId,
+            newsLetterOwnerId:newsLetterOwnerId
         });
+        console.log("Subscribers: ",subscribers)
+       
         return JSON.stringify(subscribers);
     } catch (error) {
         console.log(error);

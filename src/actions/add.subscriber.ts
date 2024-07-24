@@ -15,7 +15,7 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
 
 
         //find out our newsletter owner
-        const newsLetterOwner=allUsers.find((i)=> i.username===username);
+        const newsLetterOwner=await allUsers.find((i)=> i.username===username);
 
         //Check if subscriber already exists
         const isSubscriberExist=await Subscriber.findOne({
@@ -32,7 +32,6 @@ export const AddSubscriber=async({email,username}:{email:string,username:string}
                 source:"InformedBox",
                 status:"Subscribed"
             })
-            console.log(subscriber)
             return {message:subscriber}
         }
 
