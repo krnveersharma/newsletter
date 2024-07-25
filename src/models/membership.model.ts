@@ -4,7 +4,7 @@ const {Schema}=mongoose;
 
 const membershipSchema=new Schema(
     {
-        title:{
+        userId:{
             type:String,
         },
         stripeCustomerId:{

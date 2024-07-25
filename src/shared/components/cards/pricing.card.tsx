@@ -1,9 +1,19 @@
+import { stripeSubscribe } from "@/actions/stripe.subscribe";
 import { freePlan, GrowPlan, scalePlan } from "@/app/configs/constants";
 import { ICONS } from "@/shared/utils/icons";
+import { useUser } from "@clerk/nextjs";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const PricingCard = ({ active }: { active: string }) => {
+  const {user}=useUser();
+  const history=useRouter();
+  const handleSubscription=async({price,plan}:{price:string,plan:string})=>{
+    await stripeSubscribe({price:price,userId:user?.id!}).then((res:any)=>{
+      history.push(res);
+    });
+  }
   return (
     <div className="w-full md:flex items-start justify-around py-8">
       <div className="md:w-[400px] bg-white rounded p-5 my-5 md:my-0">
@@ -87,7 +97,8 @@ const PricingCard = ({ active }: { active: string }) => {
           </div>
         ))}
         <br/>
-        <Button color="primary" className="w-full text-xl !py-6">
+        <Button color="primary" className="w-full text-xl !py-6"
+        onClick={(e)=>handleSubscription({price:active==="Monthly"?"price_1PgW0MIlXouASmwH9WNnmAUC":"price_1PgA2lIlXouASmwHUbC4KV30",plan:"Grow"})}>
             Get Started
         </Button>
         <p className="pt-1 opacity-[0.7] text-center">
@@ -132,7 +143,9 @@ const PricingCard = ({ active }: { active: string }) => {
         <Button
           color="primary"
           className="w-full text-xl !py-6"
-          
+          onClick={()=>handleSubscription({
+            price:active==="Monthly"
+?"price_1PgA32IlXouASmwH5sIQbaWF":"price_1PgA9aIlXouASmwHCemXFmES" , plan:"SCALE"        })}
         >
           Get Started
         </Button>

@@ -9,7 +9,9 @@ export const addStripe=async()=>{
     try {
         await connectDb();
         const user = await currentUser();
-        const membership=await Membership.findOne({userId:user?.id!}); 
+        const userId=user?.id;
+        console.log("user: ",user?.id);
+        const membership=await Membership.findOne({userId:userId}); 
         if(membership){
             return 
         }
@@ -20,10 +22,9 @@ export const addStripe=async()=>{
             await stripe.customers.create({
                 email:user?.emailAddresses[0].emailAddress,
                 name:user?.firstName!+user?.lastName!,
-    
             }).then(async(customer)=>{
                 await Membership.create({
-                    userId:user?.id,
+                    userId:userId,
                     stripeCustomerId:customer.id,
                     plan:"LAUNCH"
                 });
