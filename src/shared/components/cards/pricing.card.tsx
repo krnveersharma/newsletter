@@ -98,7 +98,7 @@ const PricingCard = ({ active }: { active: string }) => {
         ))}
         <br/>
         <Button color="primary" className="w-full text-xl !py-6"
-        onClick={(e)=>handleSubscription({price:active==="Monthly"?"price_1PgW0MIlXouASmwH9WNnmAUC":"price_1PgA2lIlXouASmwHUbC4KV30",plan:"Grow"})}>
+        onClick={(e)=>handleSubscription({price:active==="Monthly"?"price_1PgW0MIlXouASmwH9WNnmAUC":"price_1PglRdIlXouASmwHwJvOw54i",plan:"Grow"})}>
             Get Started
         </Button>
         <p className="pt-1 opacity-[0.7] text-center">

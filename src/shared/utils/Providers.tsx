@@ -35,6 +35,7 @@ export default function Providers({ children }: ProviderProps) {
       pathname !== "/sign-up" &&
       pathname !== "/subscribe" &&
       pathname !== "/success" &&
+      
       pathname !== "/sign-in" ? (
         <div className="w-full flex">
           <div className="w-[290px] h-screen overflow-y-scroll">
