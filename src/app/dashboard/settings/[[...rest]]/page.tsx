@@ -4,12 +4,15 @@ import SettingsTab from "@/shared/components/tabs/settings.tab";
 import { useGetMembership } from "@/shared/hooks/useGetMembership";
 import useSettingFilter from "@/shared/hooks/useSettings";
 import { UserProfile } from "@clerk/nextjs";
+import { useEffect } from "react";
 
 const Page = () => {
   const { activeItem, setActiveItem } = useSettingFilter();
-  const { data } = useGetMembership();
+  const { data } = JSON.parse(useGetMembership());
+useEffect(()=>{
+  console.log("datghjka: ",data)
+},[data])
 
-console.log(data)
 
   return (
     <div className="w-full p-5">

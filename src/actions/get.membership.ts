@@ -12,7 +12,8 @@ export const getMembership=async()=>{
         const membership=await Membership.findOne({
             userId:user?.id,
         });
-        return membership;
+        console.log(membership)
+        return JSON.stringify(membership);
     } catch (error) {
         console.log(error);
     }

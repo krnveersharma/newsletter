@@ -12,15 +12,16 @@ export const useGetMembership = () => {
 
   const handleGetMembership = async () => {
     await getMembership()
-      .then((res) => {
+      .then((res:string|undefined) => {
+        res=JSON.parse(res!);
         setData(res);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
 
         setLoading(false);
       });
+     
   };
-  return {data,loading};
+  return JSON.stringify({data,loading});
 };

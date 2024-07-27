@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const UserPlan = () => {
   const { data, loading } = useSubscribersData();
   const { data: membershipData, loading: membershipLoading } =
-    useGetMembership();
+    JSON.parse(useGetMembership());
   const history = useRouter();
   const handleManage = async () => {
     await manageSubscription({
