@@ -37,7 +37,13 @@ const UserPlan = () => {
         className="max-w-md"
       />
       <h6 className="text-[#831743]">
-        {loading ? "..." : data?.length} of 2500 added
+        {loading ? "..." : data?.length} of{" "}
+        {membershipData?.plan === "LAUNCH"
+          ? "2500"
+          : membershipData?.plan === "GROW"
+          ? "10,000"
+          : "1,00,000"}{" "}
+         added
       </h6>
     </div>
   );
