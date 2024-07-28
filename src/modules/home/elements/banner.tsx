@@ -41,7 +41,7 @@ const Banner = () => {
           <h3 className="text-3xl text-center">Built by newsletter people</h3>
           <br />
           <div className="flex w-full justify-center">
-            <Button color="primary" className="text-xl !p-8" onClick={()=>router.push('/dashboard')}>
+            <Button color="primary" className="text-xl !p-8" onClick={()=>window.location.assign('/dashboard')}>
               Get Started
             </Button>
           </div>
