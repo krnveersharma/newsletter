@@ -14,7 +14,6 @@ const Page = () => {
     <div>
       <Header/>
       <Banner/>
-      <Branding/>
       <Benefits/>
       <FeatureHighlight/>
       <Pricing/>

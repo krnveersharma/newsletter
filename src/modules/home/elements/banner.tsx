@@ -1,8 +1,11 @@
+"use client"
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Banner = () => {
+  const router=useRouter();
   return (
     <div className="bg-[#f7f5ff] h-[95vh]">
       <svg
@@ -38,7 +41,7 @@ const Banner = () => {
           <h3 className="text-3xl text-center">Built by newsletter people</h3>
           <br />
           <div className="flex w-full justify-center">
-            <Button color="primary" className="text-xl !p-8">
+            <Button color="primary" className="text-xl !p-8" onClick={()=>router.push('/dashboard')}>
               Get Started
             </Button>
           </div>

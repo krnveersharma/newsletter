@@ -12,9 +12,7 @@ const Header = () => {
                 <Logo/>
             </Link>
         </div>
-        <div>
-            <NavItems/>
-        </div>
+       
         <div className='flex items-center gap-3'>
             <Toolbar/>
         </div>
