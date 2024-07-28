@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const FeatureHighlight = () => {
   return (
@@ -27,9 +28,11 @@ const FeatureHighlight = () => {
           experienced - proceed with caution.
         </p>
         <br />
+        <Link href={'/dashboard'}>
         <Button className="bg-white border-[2px] border-[#000] rounded text-2xl !p-7 !px-16">
           Start Building
         </Button>
+        </Link>
       </div>
     </div>
   );

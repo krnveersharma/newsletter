@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -41,9 +42,11 @@ const Banner = () => {
           <h3 className="text-3xl text-center">Built by newsletter people</h3>
           <br />
           <div className="flex w-full justify-center">
-            <Button color="primary" className="text-xl !p-8" onClick={()=>window.location.assign('/dashboard')}>
+            <Link href={'/dashboard'}>
+            <Button color="primary" className="text-xl !p-8" >
               Get Started
             </Button>
+            </Link>
           </div>
           <br />
           <h5 className="text-center text-lg">start a 30day free trial</h5>
